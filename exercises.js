@@ -61,13 +61,22 @@ console.assert(isVowel("d") === false);
 // ---------------------
 
 function rovarspraket(phrase){
-    "use strict";
+  "use strict";
+  var newString = "";
+  var consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r','s','t', 'v', 'w', 'x', 'y', 'z'];
 
-  var vowels = ["a", "e", "i", "o", "u"];
-  for (var i = 0; i < vowels.length; i++) {
-
+  for (var i = 0; i < phrase.length; i++) {
+    var character = phrase.charAt(i);
+    if(consonants.indexOf(character) == -1) {
+      newString += character;
+    } else {
+      newString += character + 'o' + character;
+    }
   }
+  return newString;
 }
+
+console.assert(rovarspraket("this is fun") == "tothohisos isos fofunon");
 
 // ---------------------
 // Define a function sum() and a function multiply() that sums and multiplies (respectively) all the numbers in an array of numbers. For example, sum([1,2,3,4]) should return 10, and multiply([1,2,3,4]) should return 24.
@@ -105,22 +114,26 @@ function reverse(wordy) {
     }
 return text
 }
-console.log(reverse('problelkaj'));
+console.assert(reverse('jag testar') == 'ratset gaj');
 
 // ---------------------
 // Write a function findLongestWord() that takes an array of words and returns the length of the longest one.
 // ---------------------
+var arrayOfWords = ['hey', 'howdy', 'bonjour', 'hi'];
 
 function findLongestWord(words){
-    "use strict";
-  var elements = words.length;
+  "use strict";
   var count = 0;
-  for (i = 0; i < elements; i++) {
-    if (words[i].length > count)
-    count = words[i].length;
+  for(var i = 0; i < words.length; i++) {
+    if(words[i].length > count) {
+      count = words[i].length;
+    }
   }
-  console.log(count);
-}
+  return count;
+};
+
+console.assert(findLongestWord(arrayOfWords) === 7);
+// console.assert(findLongestWord(arrayOfWords) === leoeoe);
 
 // ---------------------
 // Write a function filterLongWords() that takes an array of words and an integer i and returns the array of words that are longer than i.
@@ -128,31 +141,48 @@ function findLongestWord(words){
 // if(num1 > num2 && num1 > num3){
 //   return (num1);
 
-function filterLongWords(word1 ,word2, word3, word4, i){
-    "use strict";
-var filterLongWords = ["hap", "happ", "happy", "h", i];
 
-  if( word1 > word2 && word1 > word3 && word1 > word4 ){
-    return (word1);
+
+function filterLongWords(array, num){
+  "use strict";
+  var newArray = [];
+  for (var i = 1; i < array.length; i++) {
+    if(array[i].length > num) {
+      newArray.push(array[i]);
+    }
   }
-  if( word2 > word1 && word2 > word3 && word2 > word4) {
-    return (word2);
-  }
-  if( word3 > word1 && word3 > word2 && word3 > word4) {
-    return (word3);
-  }
-  if( word4 > word1 && word4 > word2 && word4 > word3) {
-    return (word4);
-  }
+  return newArray;
 }
-console.assert(filterLongWords("happy"));
+
+
+// console.log(filterLongWords(arrayOfWords, 4));
+// //
+console.assert(filterLongWords(arrayOfWords, 4)[0] == "howdy");
+console.assert(filterLongWords(arrayOfWords, 4)[1] == "bonjour");
 
 // ---------------------
 // Write a function charFreq() that takes a string and builds a frequency listing of the characters contained in it. Represent the frequency listing as a Javascript object. Try it with something like charFreq("abbabcbdbabdbdbabababcbcbab").
 // ---------------------
 
 function charFreq(string){
-    "use strict";
-    //...
-    
+  "use strict";
+  //create an empty object to add frequency of each character//
+  var freqList = {};
+  //this is to loop through entire length of string//
+  for (var i = 0; i < string.length; i++) {
+    var char = string.charAt(i)
+    if (freqList[char]) {
+      freqList[char]++
+    } else {
+      freqList[char] = 1;
+    }
+  }
+  return freqList;
 }
+
+// console.log(charFreq("abbabcbdbabdbdbabababcbcbab"));
+
+console.assert(charFreq("abbabcbdbabdbdbabababcbcbab")['a'] == 7);
+console.assert(charFreq("abbabcbdbabdbdbabababcbcbab")['b'] == 14);
+console.assert(charFreq("abbabcbdbabdbdbabababcbcbab")['c'] == 3);
+console.assert(charFreq("abbabcbdbabdbdbabababcbcbab")['d'] == 3);
