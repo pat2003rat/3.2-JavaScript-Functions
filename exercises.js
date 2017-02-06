@@ -143,16 +143,21 @@ console.assert(findLongestWord(arrayOfWords) === 7);
 
 
 
-function filterLongWords(array, num){
+function filterLongWords(array,  num){
   "use strict";
   var newArray = [];
-  for (var i = 1; i < array.length; i++) {
-    if(array[i].length > num) {
-      newArray.push(array[i]);
+
+  for (var i = 0; i < array.length; i++) {
+    var word = array[i];
+
+    if(word.length > num) {
+      newArray.push(word);
     }
   }
   return newArray;
 }
+
+// filterLongWords(['cool', 'neat', 'noice'], 4)
 
 
 // console.log(filterLongWords(arrayOfWords, 4));
